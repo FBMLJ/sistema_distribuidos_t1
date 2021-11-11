@@ -1,5 +1,8 @@
 import rpyc
 class MyService(rpyc.Service):
+    def on_connect(self, conn):
+        print("passei por aqui")
+        return super().on_connect(conn)
 
     def exposed_get_answer(self): # este é um método exposto
         return 42
