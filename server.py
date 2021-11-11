@@ -12,5 +12,5 @@ class MyService(rpyc.Service):
     #Para iniciar o servidor
 if __name__ == "__main__":
     from rpyc.utils.server import ThreadedServer
-    t = ThreadedServer(MyService, port=18861,protocol_config={'allow_public_attrs': True})
+    t = ThreadedServer(MyService,hostname='0.0.0.0', port=18861,auto_register=None)
     t.start()
