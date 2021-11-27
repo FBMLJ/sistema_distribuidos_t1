@@ -1,9 +1,21 @@
 import rpyc
+import time
 class MyService(rpyc.Service):
     def on_connect(self, conn):
-        print("passei por aqui")
-        return super().on_connect(conn)
+        # código que é executado quando uma conexão é iniciada, caso seja necessário
+        pass
+    def on_disconnect(self, conn):
+        # código que é executado quando uma conexão é finalizada, caso seja necessário
+        pass
 
+    def exposed_soma_vetor(self, vetor):
+        start = time.time()
+        a =  sum(vetor)
+        end = time.time()
+        print(end-start)   
+        return a
+    
+    
     def exposed_get_answer(self): # este é um método exposto
         return 42
     exposed_the_real_answer_though = 43 # este é um atributo exposto
@@ -12,5 +24,5 @@ class MyService(rpyc.Service):
     #Para iniciar o servidor
 if __name__ == "__main__":
     from rpyc.utils.server import ThreadedServer
-    t = ThreadedServer(MyService, port=18812,auto_register=None)
+    t = ThreadedServer(MyService, port=18861)
     t.start()
